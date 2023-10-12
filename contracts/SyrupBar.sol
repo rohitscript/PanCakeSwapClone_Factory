@@ -1,8 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.6.12;
 
-import "@pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
-
+import "../pancakeswap/pancake-swap-lib/contracts/token/BEP20/BEP20.sol";
 import "./CakeToken.sol";
 
 // SyrupBar with Governance.
