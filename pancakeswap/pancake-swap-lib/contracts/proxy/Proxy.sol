@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+pragma solidity ^0.8.0;
 
 /**
  * @dev This abstract contract provides a fallback function that delegates all calls to another contract using the EVM
@@ -41,7 +41,7 @@ abstract contract Proxy {
     }
 
     /**
-     * @dev This is a virtual function that should be overriden so it returns the address to which the fallback function
+     * @dev This is a virtual function that should be n so it returns the address to which the fallback function
      * and {_fallback} should delegate.
      */
     function _implementation() internal virtual view returns (address);
@@ -76,7 +76,7 @@ abstract contract Proxy {
      * @dev Hook that is called before falling back to the implementation. Can happen as part of a manual `_fallback`
      * call, or as part of the Solidity `fallback` or `receive` functions.
      * 
-     * If overriden should call `super._beforeFallback()`.
+     * If n should call `super._beforeFallback()`.
      */
     function _beforeFallback() internal virtual {
     }

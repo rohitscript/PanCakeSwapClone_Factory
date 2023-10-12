@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
 import '../pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol';
 import '../pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
@@ -13,8 +13,7 @@ interface IWBNB {
     function transfer(address to, uint256 value) external returns (bool);
     function withdraw(uint256) external;
 }
-
-contract BnbStaking is Ownable {
+ contract BnbStaking is Ownable {
     using SafeMath for uint256;
     using SafeBEP20 for IBEP20;
 
@@ -63,7 +62,7 @@ contract BnbStaking is Ownable {
     event Withdraw(address indexed user, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 amount);
 
-    constructor(
+     constructor(
         IBEP20 _lp,
         IBEP20 _rewardToken,
         uint256 _rewardPerBlock,
@@ -71,7 +70,7 @@ contract BnbStaking is Ownable {
         uint256 _bonusEndBlock,
         address _adminAddress,
         address _wbnb
-    ) public {
+    )  {
         rewardToken = _rewardToken;
         rewardPerBlock = _rewardPerBlock;
         startBlock = _startBlock;

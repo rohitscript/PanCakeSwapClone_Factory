@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-pragma solidity >=0.4.0;
+pragma solidity ^0.8.0;
 
 import '../GSN/Context.sol';
 
@@ -24,7 +24,7 @@ contract Manageable is Context {
     /**
      * @dev Initializes the contract setting the deployer as the initial manager.
      */
-    constructor() internal {
+    constructor()  {
         address msgSender = _msgSender();
         _manager = msgSender;
         emit ManagementTransferred(address(0), msgSender);

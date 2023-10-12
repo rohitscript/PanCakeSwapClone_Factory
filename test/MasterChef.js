@@ -7,6 +7,7 @@ describe('PanCakeSwap Contract', async () => {
   let syrupBar;
   let LPToken1;
   let LPToken2;
+  let factory;
   
 async function _deposit(){
   await masterChef.add(100,LPToken1.target,true);
@@ -22,6 +23,8 @@ beforeEach(async () => {
 
   const CakeToken = await ethers.getContractFactory('CakeToken');
   cakeToken = await CakeToken.connect(signer[0]).deploy();
+  const Factory = await ethers.getContractFactory('Factory');
+  factory = await CakeToken.connect(signer[0]).deploy();
 
   const SyrupBar = await ethers.getContractFactory('SyrupBar');
   syrupBar = await SyrupBar.connect(signer[0]).deploy(cakeToken.target);
@@ -44,6 +47,8 @@ it('  *** Print Contract Address of MasterChef ***  ', async () => {
   console.log(`Contract Address of SyrupBar : ${syrupBar.target}`)
   console.log(`Contract Address of LPToken1 : ${LPToken1.target}`)
   console.log(`Contract Address of LPToken2 : ${LPToken2.target}`)
+  console.log(`Contract Address of factory : ${factory.target}`)
+  
 });
 it('  *** Test Add Function ***  ', async () => {
   await masterChef.add(100,LPToken1.target,true);

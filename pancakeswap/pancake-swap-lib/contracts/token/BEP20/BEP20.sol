@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity >=0.4.0;
+pragma solidity ^0.8.0;
 
 import '../../access/Ownable.sol';
 import '../../GSN/Context.sol';
@@ -32,7 +32,7 @@ import '../../utils/Address.sol';
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IBEP20-approve}.
  */
-contract BEP20 is Context, IBEP20, Ownable {
+contract BEP20 is Context, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
@@ -55,51 +55,51 @@ contract BEP20 is Context, IBEP20, Ownable {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    constructor(string memory name, string memory symbol) public {
-        _name = name;
-        _symbol = symbol;
+    constructor(string memory __name, string memory __symbol) {
+        _name = __name;
+        _symbol = __symbol;
         _decimals = 18;
     }
 
     /**
      * @dev Returns the bep token owner.
      */
-    function getOwner() external override view returns (address) {
+    function getOwner() external  view returns (address) {
         return owner();
     }
 
     /**
      * @dev Returns the token name.
      */
-    function name() public override view returns (string memory) {
+    function name() public  view returns (string memory) {
         return _name;
     }
 
     /**
      * @dev Returns the token decimals.
      */
-    function decimals() public override view returns (uint8) {
+    function decimals() public  view returns (uint8) {
         return _decimals;
     }
 
     /**
      * @dev Returns the token symbol.
      */
-    function symbol() public override view returns (string memory) {
+    function symbol() public  view returns (string memory) {
         return _symbol;
     }
 
     /**
      * @dev See {BEP20-totalSupply}.
      */
-    function totalSupply() public override view returns (uint256) {
+    function totalSupply() public  view returns (uint256) {
         return _totalSupply;
     }
 
     /**
      * @dev See {BEP20-balanceOf}.
      */
-    function balanceOf(address account) public override view returns (uint256) {
+    function balanceOf(address account) public  view returns (uint256) {
         return _balances[account];
     }
 
@@ -111,7 +111,7 @@ contract BEP20 is Context, IBEP20, Ownable {
      * - `recipient` cannot be the zero address.
      * - the caller must have a balance of at least `amount`.
      */
-    function transfer(address recipient, uint256 amount) public override returns (bool) {
+    function transfer(address recipient, uint256 amount) public  returns (bool) {
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
@@ -119,7 +119,7 @@ contract BEP20 is Context, IBEP20, Ownable {
     /**
      * @dev See {BEP20-allowance}.
      */
-    function allowance(address owner, address spender) public override view returns (uint256) {
+    function allowance(address owner, address spender) public  view returns (uint256) {
         return _allowances[owner][spender];
     }
 
@@ -130,7 +130,7 @@ contract BEP20 is Context, IBEP20, Ownable {
      *
      * - `spender` cannot be the zero address.
      */
-    function approve(address spender, uint256 amount) public override returns (bool) {
+    function approve(address spender, uint256 amount) public  returns (bool) {
         _approve(_msgSender(), spender, amount);
         return true;
     }
@@ -151,7 +151,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         address sender,
         address recipient,
         uint256 amount
-    ) public override returns (bool) {
+    ) public  returns (bool) {
         _transfer(sender, recipient, amount);
         _approve(
             sender,
@@ -238,7 +238,7 @@ contract BEP20 is Context, IBEP20, Ownable {
 
         _balances[sender] = _balances[sender].sub(amount, 'BEP20: transfer amount exceeds balance');
         _balances[recipient] = _balances[recipient].add(amount);
-        emit Transfer(sender, recipient, amount);
+        // emit Transfer(sender, recipient, amount);
     }
 
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing
@@ -255,7 +255,7 @@ contract BEP20 is Context, IBEP20, Ownable {
 
         _totalSupply = _totalSupply.add(amount);
         _balances[account] = _balances[account].add(amount);
-        emit Transfer(address(0), account, amount);
+        // emit Transfer(address(0), account, amount);
     }
 
     /**
@@ -274,7 +274,7 @@ contract BEP20 is Context, IBEP20, Ownable {
 
         _balances[account] = _balances[account].sub(amount, 'BEP20: burn amount exceeds balance');
         _totalSupply = _totalSupply.sub(amount);
-        emit Transfer(account, address(0), amount);
+        // emit Transfer(account, address(0), amount);
     }
 
     /**
@@ -299,7 +299,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         require(spender != address(0), 'BEP20: approve to the zero address');
 
         _allowances[owner][spender] = amount;
-        emit Approval(owner, spender, amount);
+        // emit Approval(owner, spender, amount);
     }
 
     /**

@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
 import '../pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
 import '../pancakeswap/pancake-swap-lib/contracts/token/BEP20/SafeBEP20.sol';
@@ -21,7 +21,7 @@ contract LotteryRewardPool is Ownable {
         IBEP20 _cake,
         address _admin,
         address _receiver
-    ) public {
+    )  {
         chef = _chef;
         cake = _cake;
         adminAddress = _admin;
@@ -59,7 +59,7 @@ contract LotteryRewardPool is Ownable {
     }
 
     // EMERGENCY ONLY.
-    function emergencyWithdraw(IBEP20 _token, uint256 _amount) external onlyOwner {
+    function emergencyWithdraw( uint256 _amount) external onlyOwner {
         cake.safeTransfer(address(msg.sender), _amount);
         emit EmergencyWithdraw(msg.sender, _amount);
     }

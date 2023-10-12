@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
 import '../pancakeswap/pancake-swap-lib/contracts/math/SafeMath.sol';
 import '../pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
@@ -92,7 +92,7 @@ contract MasterChef is Ownable {
         address _devaddr,
         uint256 _cakePerBlock,
         uint256 _startBlock
-    ) public {
+    )  {
         cake = _cake;
         syrup = _syrup;
         devaddr = _devaddr;
@@ -100,8 +100,8 @@ contract MasterChef is Ownable {
         startBlock = _startBlock;
 
         // staking pool
-        poolInfo.push(PoolInfo({
-            lpToken: _cake,
+       poolInfo.push(PoolInfo({
+            lpToken: IBEP20(address(_cake)),
             allocPoint: 1000,
             lastRewardBlock: startBlock,
             accCakePerShare: 0
