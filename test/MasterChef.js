@@ -37,6 +37,7 @@ beforeEach(async () => {
   await cakeToken.transferOwnership(masterChef.target);
   await syrupBar.transferOwnership(masterChef.target);
 })
+describe(' Starting Function', async () => {
 it('  *** Print Contract Address of MasterChef ***  ', async () => {
   console.log(`Contract Address of MasterChef : ${masterChef.target}`);
   console.log(`Contract Address of CakeToken : ${cakeToken.target}`)
@@ -55,8 +56,8 @@ it('  *** Set Function ***  ', async () => {
   await masterChef.set(1,200,true);
   await masterChef.poolInfo(1);
   await LPToken1.connect(signer[0]).balanceOf(signer[0].address);
+ });
 });
-
 describe(' Deposit Function', async () => {
 it( " *** Deposit Function ***  ",async ()=>{
   await masterChef.add(1000,LPToken1.target,true);
