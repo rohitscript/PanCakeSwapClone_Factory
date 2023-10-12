@@ -52,5 +52,30 @@ it('  *** Print Contract Address of MasterChef ***  ', async () => {
   await factory.createChild();
   console.log(await factory.getData())
 });
+});
+describe(' Factory Function', async () => {
+  it('  *** createChild function Test ***  ', async () => {
+    await factory.createChild();
+    await factory.createChild();
+    await factory.createChild();
+    console.log("New MasterChef Address : ",await factory.getData())
+    });
+    it("add function : ",async()=>{
+      console.log("inside add function")
+      await factory.createChild();
+      let temp = await factory.getData()
+      console.log("MasterChef Address 1 ",temp[0])
+  
+      let temp1 = await masterChef.attach(temp[0])
+      console.log("MasterChef Address 1 ",temp1.target)
+  
+      await temp1.add(100,LPToken1.target,true);
+      console.log("Pool length ", await temp1.poolLength())
+  
+      await temp1.add(200,LPToken2.target,true);
+      console.log("Pool length ", await temp1.poolLength())
+  
+      expect(await temp1.poolLength()).to.be.equal(2n)       
+  })
   });
 });

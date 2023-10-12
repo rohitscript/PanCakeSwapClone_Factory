@@ -33,7 +33,7 @@ contract Factory  {
         MasterChef child = MasterChef(Clones.clone(masterContract));
         data.push(child);
      }
-
+     
      function getData() external view returns(MasterChef[] memory){
          return data;
      }
