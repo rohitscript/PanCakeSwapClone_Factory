@@ -10,38 +10,29 @@ describe('PanCakeSwap Contract', async () => {
   let factory;
   let masterColab;
   
-async function _deposit(){
-  await masterChef.connect(signer[0]).add(100,LPToken1.target,true);
-  await LPToken1.connect(signer[0]).approve(masterChef.target,1000);
-  await masterChef.connect(signer[0]).deposit(1,500);
-}
-async function _beforeStaking(){
-  await _deposit();
-  await masterChef.connect(signer[0]).withdraw(1,500);
-}
 beforeEach(async () => {
   signer = await ethers.getSigners();
 
   const CakeToken = await ethers.getContractFactory('CakeToken');
   cakeToken = await CakeToken.connect(signer[0]).deploy();
-  console.log("check")
+  // console.log("check")
   const SyrupBar = await ethers.getContractFactory('SyrupBar');
   syrupBar = await SyrupBar.connect(signer[0]).deploy(cakeToken.target);
-  console.log("check")
+  // console.log("check")
   const MasterChef = await ethers.getContractFactory('MasterChef');
   masterChef = await MasterChef.connect(signer[0]).deploy(cakeToken.target,syrupBar.target,signer[0].address,10000,1);
-  console.log("check")
+  // console.log("check")
   const Factory = await ethers.getContractFactory('Factory');
   factory = await Factory.connect(signer[0]).deploy(masterChef.target);
-  console.log("check")
+  // console.log("check")
   const MasterColab = await ethers.getContractFactory('masterColab');
-  masterColab = await MasterColab.connect(signer[0]).deploy();
-  console.log("check")
+  masterColab = await MasterColab.connect(signer[0]).deploy(factory.target);
+  // console.log("check")
   const MockBEP20 = await ethers.getContractFactory('MockBEP20');
   lpToken1 = await MockBEP20.connect(signer[0]).deploy("LP Token 1","LP1",1000);
-  console.log("check")
+  // console.log("check")
   lpToken2 = await MockBEP20.connect(signer[0]).deploy("LP Token 2","LP2",1000);
-  console.log("check")
+  // console.log("check")
   await cakeToken.transferOwnership(masterChef.target);
   await syrupBar.transferOwnership(masterChef.target);
 })
@@ -66,8 +57,8 @@ it('  ** Print Contract Address of MasterChef **  ', async () => {
 
   it("add function : ",async()=>{
     console.log("inside add function")
-    await factory.createChild();
-    console.log(await factory.getData())
+    // await factory.createChild();
+    // console.log(await factory.getData())
   //   await factory.connect(signer[0]).createChild();
   //  let temp = await factory.connect(signer[0]).getData()
   //   console.log(temp[0])

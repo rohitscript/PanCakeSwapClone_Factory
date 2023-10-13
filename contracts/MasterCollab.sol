@@ -1,34 +1,33 @@
-// SPDX-License-Identifier:MIT
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
 import "./MasterChef.sol";
 import "./Factory.sol";
-import "../hardhat/console.sol";
+import "hardhat/console.sol";
 
-contract masterColab  {
-    // MasterChef[] public masterChef;
-     MasterChef public master;
-     Factory public factory;
-     address masterContract;
+contract masterColab {
+    MasterChef public master;
+    Factory public factory;
+    address public masterContract;
 
-     function newFarm(uint256 allocPoint, IBEP20 lpToken, bool _withUpdate) public{
-       MasterChef nfarm;
-       console.log('check colab');
-       factory.createChild();
-console.log('check colab');
-        nfarm = factory.getData();
+    constructor(address _factoryAddress) {
+        factory = Factory(_factoryAddress);
+    }
 
-        master = nfarm;
+    function newFarm(uint256 _allocPoint, IBEP20 lpToken, bool _withUpdate) public {
+        console.log('check colab newfarm');
+        address nfarmAddress = factory.createChild();
         console.log('check colab');
-        master.add(_allocPoint, lpToken, withUpdate);
-     }
+        master = MasterChef(nfarmAddress);
+        master.add(_allocPoint, lpToken, _withUpdate);
+    }
 
-     function deposit(uint id,uint amount) public{
-        master.deposit(id,amount);
-     }
-     function withdraw(uint id,uint amount) public{
-        master.withdraw(id,amount);
-     }
- 
-} 
+    function deposit(uint id, uint amount) public {
+        master.deposit(id, amount);
+    }
+
+    function withdraw(uint id, uint amount) public {
+        master.withdraw(id, amount);
+    }
+}
