@@ -8,6 +8,7 @@ import '../pancakeswap/pancake-swap-lib/contracts/access/Ownable.sol';
 
 import "./CakeToken.sol";
 import "./SyrupBar.sol";
+import "hardhat/console.sol";
 
 // import "@nomiclabs/buidler/console.sol";
 
@@ -230,7 +231,7 @@ contract MasterChef is Ownable {
     function deposit(uint256 _pid, uint256 _amount) public {
 
         require (_pid != 0, 'deposit CAKE by staking');
-
+        // console.log("poolInfo[_pid]",poolInfo[_pid]);
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);

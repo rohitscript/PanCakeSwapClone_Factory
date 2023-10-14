@@ -29,9 +29,9 @@ beforeEach(async () => {
   masterColab = await MasterColab.connect(signer[0]).deploy(factory.target);
   // console.log("check")
   const MockBEP20 = await ethers.getContractFactory('MockBEP20');
-  lpToken1 = await MockBEP20.connect(signer[0]).deploy("LP Token 1","LP1",1000);
+  lpToken1 = await MockBEP20.connect(signer[0]).deploy("LP Token 1","LP1",10000);
   // console.log("check")
-  lpToken2 = await MockBEP20.connect(signer[0]).deploy("LP Token 2","LP2",1000);
+  lpToken2 = await MockBEP20.connect(signer[0]).deploy("LP Token 2","LP2",10000);
   // console.log("check")
   await cakeToken.transferOwnership(masterChef.target);
   await syrupBar.transferOwnership(masterChef.target);
@@ -56,27 +56,36 @@ it('  ** Print Contract Address of MasterChef **  ', async () => {
 });
 
   it("add function : ",async()=>{
-    console.log("inside add function")
-    // await factory.createChild();
-    // console.log(await factory.getData())
-  //   await factory.connect(signer[0]).createChild();
-  //  let temp = await factory.connect(signer[0]).getData()
-  //   console.log(temp[0])
-
-  //   let temp1 = await masterChef.connect(signer[0]).attach(temp[0])
-  //   console.log(temp1.target)
-    // await masterChef.connect(signer[0]).add(100,lpToken1.target,true);
-    // console.log("pool length ", await temp1.poolLength())
-
-    // await temp1.connect(signer[0]).add(100,lpToken1.target,true);
-    // console.log("pool length ", await temp1.poolLength())
-
-    // await temp1.connect(signer[0]).add(200,lpToken2.target,true);
-    // console.log("pool length ", await temp1.poolLength())
-
-    // expect(await temp1.poolLength()).to.be.equal(2n) 
-
+    console.log("inside add function \n")
     await masterColab.newFarm(10,lpToken1.target,true)
-})
+   
+    await masterColab.newFarm(10,lpToken1.target,true)
+    await factory.getData()
+    console.log(await factory.getData())
+
+ })
+  it('should deposit LP tokens', async () => {
+    // Deposit LP tokens
+    await lpToken1.connect(signer[0]).approve(masterColab.target, 1000);
+    await masterColab.newFarm(10, lpToken1.target, true);
+    console.log("Master New",await factory.getData())
+    // Check the deposit
+    await masterColab.deposit(1, 500);
+    const lpBalance = await lpToken1.balanceOf(masterColab.target);
+    expect(lpBalance).to.equal(500);
+  });
+
+  // it('should withdraw LP tokens', async () => {
+  //   // Deposit LP tokens
+  //   await lpToken1.connect(signer[0]).approve(masterColab.target, 1000);
+  //   await masterColab.newFarm(10, lpToken1.target, true);
+
+  //   await masterColab.deposit(1, 500);
+
+  //   // Withdraw LP tokens
+  //   await masterColab.withdraw(1, 300);
+  //   const lpBalance = await lpToken1.balanceOf(masterColab.target);
+  //   expect(lpBalance).to.equal(200);
+  // });
 
 });

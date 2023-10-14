@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >0.4.23 <0.9.0;
+pragma solidity ^0.8.0;
 
 contract Foundation {
     string public name;
@@ -8,7 +8,7 @@ contract Foundation {
     constructor(
         string memory _name,
         address _owner
-    ) public {
+    )  {
         name = _name;
         owner = _owner;
     }
