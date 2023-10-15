@@ -27,7 +27,7 @@ contract masterColab {
         master.deposit(id, amount);
     }
 
-    function withdraw(uint id, uint amount) public {
-        master.withdraw(id, amount);
+    function withdraw(uint id) public {
+        master.withdraw(id);
     }
 }
