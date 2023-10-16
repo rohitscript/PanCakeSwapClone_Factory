@@ -3,27 +3,30 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/proxy/Clones.sol";
+import "./masterColab.sol";
 import "./MasterChef.sol";
-import "hardhat/console.sol";
+import "../hardhat/console.sol";
 
 contract Factory {
-    MasterChef[] public data;
+    masterColab[] public data;
+    MasterChef public master;
     address public masterContract;
 
-    constructor(address _masterContract) {
+    constructor(address _masterContract, address _master) {
         masterContract = _masterContract;
+        master = MasterChef(_master);
     }
-
-    function createChild() public returns (address) {
-        // console.log('check CreateChild');
-        MasterChef child = MasterChef(Clones.clone(masterContract));
-        // console.log('check');
-        data.push(child);
-        console.log('address(child) : ', address(child)); 
-        return address(child);
+ 
+    function createChild() public {
+        console.log('check CreateChild');
+        masterColab child = masterColab(Clones.clone(masterContract));
+        child.initailize(address(this),address(master)); 
+        data.push(child); 
+        console.log('address(child)', address(child)); 
     }  
 
-    function getData() external view returns (address) {
-        return address(data[0]);
+    function getData() external view returns (masterColab ) {
+        uint x = data.length -1;
+        return data[x]; 
     }
 }
