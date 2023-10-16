@@ -8,7 +8,7 @@ import '../pancakeswap/pancake-swap-lib/contracts/access/Ownable.sol';
 
 import "./CakeToken.sol";
 import "./SyrupBar.sol";
-import "../hardhat/console.sol";
+import "hardhat/console.sol";
 
 // import "@nomiclabs/buidler/console.sol";
 

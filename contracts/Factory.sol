@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/proxy/Clones.sol";
 import "./masterColab.sol";
 import "./MasterChef.sol";
-import "../hardhat/console.sol";
+import "hardhat/console.sol";
 
 contract Factory {
     masterColab[] public data;

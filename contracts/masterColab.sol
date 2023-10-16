@@ -5,7 +5,7 @@ pragma solidity ^0.8.0;
 import '../pancakeswap/pancake-swap-lib/contracts/token/BEP20/IBEP20.sol';
 import "./MasterChef.sol";
 import "./Factory.sol";
-import "../hardhat/console.sol";
+import "hardhat/console.sol";
 
 contract masterColab {
     MasterChef public master;
