@@ -6,7 +6,7 @@ import "./MasterChef.sol";
 import "./Factory.sol";
 import "hardhat/console.sol";
 
-contract masterColab {
+contract MasterColab {
     MasterChef public master;
     Factory public factory;
     address public masterContract;
@@ -25,5 +25,5 @@ contract masterColab {
 
     function deposit(uint id, uint amount) public {
         master.deposit(id, amount);
-    }
+    }  
 }
