@@ -9,16 +9,7 @@ describe('PanCakeSwap Contract', async () => {
   let lpToken2;
   let factory;
   let masterColab;
-  
-async function _deposit(){
-  await masterChef.connect(signer[0]).add(100,lpToken1.target,true);
-  await lpToken1.connect(signer[0]).approve(masterChef.target,1000);
-  await masterChef.connect(signer[0]).deposit(1,500);
-}
-async function _beforeStaking(){
-  await _deposit();
-  await masterChef.connect(signer[0]).withdraw(1,500);
-}
+
 beforeEach(async () => {
   signer = await ethers.getSigners();
 
@@ -84,7 +75,5 @@ it.only("test",async()=>{
  console.log("Cake Master ",await cakeToken.balanceOf(master.target));
  await master.withdraw(1,10,lpToken1.target);
  console.log("cakeToken.balanceOf ",await cakeToken.balanceOf(master.target));
-
-})
-
+ })
 });
