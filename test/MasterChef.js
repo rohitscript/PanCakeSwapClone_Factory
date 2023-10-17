@@ -31,7 +31,6 @@ beforeEach(async () => {
   const Factory = await ethers.getContractFactory('Factory');
   factory = await Factory.connect(signer[0]).deploy(masterColab.target,masterChef.target);
 
-
   lpToken2 = await MockBEP20.connect(signer[0]).deploy("LP Token 2","LP2",1000);
 
   await cakeToken.transferOwnership(masterChef.target);
@@ -53,27 +52,29 @@ it('   Print Contract Address of MasterChef   ', async () => {
   console.log(await factory.getData())
   console.log( masterChef.target)
 });
-it.only("test",async()=>{
+it("Testing MasterCollab",async()=>{
   await factory.createChild();
   let master = await masterColab.attach(await factory.getData());
 
   await master.get();
   await master.newFarm(100,lpToken1.target,true);
-  console.log(await masterChef.poolLength())
 
-  console.log(await masterChef.target)
+  console.log(" Pool Length ",await masterChef.poolLength())
+
+  console.log("MasterChef Contract Address",await masterChef.target)
   console.log(await master.master())
-
-  console.log("master",await master.target)
-
+  console.log("MasterAttach Contract Address",await master.target)
 
   await lpToken1.connect(signer[0]).approve(master.target,300);
-  console.log(await cakeToken.balanceOf(master.target));
-  console.log(await lpToken1.connect(signer[0]).balanceOf(master.target));
-  console.log(await lpToken1.connect(signer[0]).balanceOf(signer[0].address));
- await master.depositit(1,10,lpToken1.target);
- console.log("Cake Master ",await cakeToken.balanceOf(master.target));
- await master.withdraw(1,10,lpToken1.target);
- console.log("cakeToken.balanceOf ",await cakeToken.balanceOf(master.target));
+
+  console.log("cakeToken.balanceOf",await cakeToken.balanceOf(master.target));
+  console.log("lpToken1 master",await lpToken1.connect(signer[0]).balanceOf(master.target));
+  console.log("lpToken1 signer",await lpToken1.connect(signer[0]).balanceOf(signer[0].address));
+  await master.depositit(1,10,lpToken1.target);
+
+  console.log("Cake Master ",await cakeToken.balanceOf(master.target));
+  await master.withdraw(1,10,lpToken1.target);
+
+  console.log("cakeToken.balanceOf ",await cakeToken.balanceOf(master.target));
  })
 });
