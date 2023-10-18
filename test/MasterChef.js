@@ -46,11 +46,11 @@ it('   Print Contract Address of MasterChef   ', async () => {
   console.log(`Contract Address of factory : ${factory.target}`)
   
   await factory.createChild();
-  console.log(await factory.getData())
+  // console.log(await factory.getData())
 
   await factory.createChild();
-  console.log(await factory.getData())
-  console.log( masterChef.target)
+  // console.log(await factory.getData())
+  // console.log( masterChef.target)
 });
 it("Testing MasterCollab",async()=>{
   await factory.createChild();
@@ -59,22 +59,22 @@ it("Testing MasterCollab",async()=>{
   await master.get();
   await master.newFarm(100,lpToken1.target,true);
 
-  console.log(" Pool Length ",await masterChef.poolLength())
+  // console.log(" Pool Length ",await masterChef.poolLength())
 
-  console.log("MasterChef Contract Address",await masterChef.target)
-  console.log(await master.master())
-  console.log("MasterAttach Contract Address",await master.target)
+  // console.log("MasterChef Contract Address",await masterChef.target)
+  // console.log(await master.master())
+  // console.log("MasterAttach Contract Address",await master.target)
 
   await lpToken1.connect(signer[0]).approve(master.target,300);
 
-  console.log("cakeToken.balanceOf",await cakeToken.balanceOf(master.target));
-  console.log("lpToken1 master",await lpToken1.connect(signer[0]).balanceOf(master.target));
-  console.log("lpToken1 signer",await lpToken1.connect(signer[0]).balanceOf(signer[0].address));
+  // console.log("cakeToken.balanceOf",await cakeToken.balanceOf(master.target));
+  // console.log("lpToken1 master",await lpToken1.connect(signer[0]).balanceOf(master.target));
+  // console.log("lpToken1 signer",await lpToken1.connect(signer[0]).balanceOf(signer[0].address));
   await master.depositit(1,10,lpToken1.target);
 
-  console.log("Cake Master ",await cakeToken.balanceOf(master.target));
+  // console.log("Cake Master ",await cakeToken.balanceOf(master.target));
   await master.withdraw(1,10,lpToken1.target);
 
-  console.log("cakeToken.balanceOf ",await cakeToken.balanceOf(master.target));
+  // console.log("cakeToken.balanceOf ",await cakeToken.balanceOf(master.target));
  })
 });

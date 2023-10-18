@@ -18,11 +18,11 @@ contract Factory {
     }
  
     function createChild() public {
-        console.log('check CreateChild');
+        // console.log('check CreateChild');
         masterColab child = masterColab(Clones.clone(masterContract));
         child.initailize(address(this),address(master)); 
         data.push(child); 
-        console.log('address(child)', address(child)); 
+        // console.log('address(child)', address(child)); 
     }  
 
     function getData() external view returns (masterColab ) {

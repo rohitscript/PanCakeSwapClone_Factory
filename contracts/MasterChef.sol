@@ -235,7 +235,7 @@ contract MasterChef is Ownable {
         PoolInfo storage pool = poolInfo[_pid];
         UserInfo storage user = userInfo[_pid][msg.sender];
         updatePool(_pid);
-        console.log(_amount);
+        // console.log(_amount);
         if (user.amount > 0) {
             uint256 pending = user.amount.mul(pool.accCakePerShare).div(1e12).sub(user.rewardDebt);
             if(pending > 0) {
@@ -243,15 +243,15 @@ contract MasterChef is Ownable {
             }
         }
         if (_amount > 0) {
-            console.log(address(msg.sender));
-            console.log(address(this));
-            console.log( _amount);
+            // console.log(address(msg.sender));
+            // console.log(address(this));
+            // console.log( _amount);
             pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
             user.amount = user.amount.add(_amount);
-               console.log("User AMount",    user.amount );
+            //    console.log("User AMount",    user.amount );
         }
         user.rewardDebt = user.amount.mul(pool.accCakePerShare).div(1e12);
-          console.log("user.rewardDebt " , user.rewardDebt);
+        //   console.log("user.rewardDebt " , user.rewardDebt);
         emit Deposit(msg.sender, _pid, _amount);
     }
 
